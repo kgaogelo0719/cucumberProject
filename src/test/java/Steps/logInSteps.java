@@ -6,39 +6,36 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
-public class logInSteps {
+public class logInSteps extends Base_InheritancePage {
 
     WebDriver driver;
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() throws InterruptedException {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.saucedemo.com/");
-        Thread.sleep(5000);
     }
 
     @And("I enter the username (.*)$")
     public void iEnterTheUsernameUsername(String username) {
-        driver.findElement(By.id("user-name")).sendKeys(username);
+        loginPage.enterUsername(username);
     }
 
     @And("I enter the password (.*)$")
     public void iEnterThePasswordPassword(String password) {
-        driver.findElement(By.id("password")).sendKeys(password);
+        loginPage.enterPassword(password);
     }
 
     @When("I click on the login button")
-    public void iClickOnTheLoginButton() {
-        driver.findElement(By.id("login-button")).click();
+    public void iClickOnTheLoginButton(String login_button) {
+        loginPage.clickLoginIn(login_button);
+
+        ///driver.findElement(By.id("login-button")).click();
     }
 
     /// Add product to cart
 
-
     @Then("I should be taken to the products page")
     public void iShouldBeTakenToTheProductsPage() {
-        driver.findElement(By.xpath("Products").isDisplayed());
+        driver.findElement(By.xpath("//*[@id=\"header_container\"]/div[2]/span")).isDisplayed();
     }
 
 }
